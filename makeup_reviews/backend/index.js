@@ -2,7 +2,7 @@ import app from './server.js';
 import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
 import MakeupDAO from './dao/MakeupDAO.js';
-// import ReviewsDAO from './dao/reviewsDAO.js'; // Assuming you have a similar DAO for reviews
+import CommentsDAO from './dao/CommentsDAO.js'; // New DAO for comments
 
 async function main() {
   dotenv.config();
@@ -14,7 +14,7 @@ async function main() {
   try {
     await client.connect();
     await MakeupDAO.injectDB(client);
-    // await ReviewsDAO.injectDB(client); // Assuming you have a similar function for injecting reviews DAO
+    await CommentsDAO.injectDB(client); // Inject the new DAO
 
     app.listen(port, () => {
       console.log(`Server is running on port: ${port}`);
