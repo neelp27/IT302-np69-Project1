@@ -3,7 +3,7 @@ import MakeupDataService from "../services/makeupDataService";
 import { Link } from "react-router-dom";
 import { Form, Button, Col, Row, Container, Card } from 'react-bootstrap';
 
-const MakeupList = () => {
+const MakeupList = ({ loggedIn }) => { // Receive loggedIn prop
   const [makeup, setMakeup] = useState([]);
   const [searchTitle, setSearchTitle] = useState("");
   const [searchRating, setSearchRating] = useState("");
@@ -126,6 +126,12 @@ const MakeupList = () => {
                   </Card.Text>
                   <Card.Text>{item.description}</Card.Text>
                   <Link to={`/makeup/${item.id}`}>View Details</Link>
+                  
+                  {loggedIn ? (
+                    <Link to={`/add-comment/${item.id}`}>Add Comment</Link>
+                  ) : (
+                    <Link to="/np69_login">Login to Add/Edit Comment</Link>
+                  )}
                 </Card.Body>
               </Card>
             </Col>
